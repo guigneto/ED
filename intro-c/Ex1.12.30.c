@@ -37,7 +37,7 @@ int main(){
     for(int angulo=0; angulo<=360;angulo++){
 
       double senoC = sin(para_rads(angulo));
-      double meuSeno =  meu_seno(angulo,10);
+      double meuSeno =  meu_seno(angulo,6);
       double diferenca = fabs(senoC - meuSeno); //valor absoluto
       printf("%3d %10.3lf %10.3lf %10.3lf \n",angulo,senoC,meuSeno,diferenca);
 
