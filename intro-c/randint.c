@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int randint(int sup, int inf){
+int randint(int inf, int sup){
   int result;
   result = inf + rand() % ((sup+1)-inf);
 
