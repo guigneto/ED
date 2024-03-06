@@ -36,7 +36,7 @@ void printMat(int m[5][6], int ls, int cs){
 
 }
 
- int main(){
+int main(){
 
 	int mA[5][6],mB[5][6],sM[5][6];
 
@@ -52,4 +52,4 @@ void printMat(int m[5][6], int ls, int cs){
 	printMat(sM,5,6);
 
 	return 0;
- }
+}
