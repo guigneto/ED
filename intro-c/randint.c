@@ -8,7 +8,7 @@ int randint(int inf, int sup){
   result = inf + rand() % ((sup+1)-inf);
 
   return result;
-  }
+}
 
 int main(){
   srand(time(NULL));
