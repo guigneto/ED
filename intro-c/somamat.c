@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 
+/*
+Faça duas matrizes 5x6 com numeros aleatorios e depois faça a soma das matrizes
+*/
+
 int randint(int inf, int sup) {
 	int result;
 	result = inf + rand() % ((sup + 1) - inf);
