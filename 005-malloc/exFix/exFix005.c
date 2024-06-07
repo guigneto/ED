@@ -1,36 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct VEICULO {
-    char placa[10];
+typedef struct {
+    char placa[12];
     char modelo[50];
     char marca[50];
-    float quilometragem;
+    int quilometragem;
 } veiculo;
 
-veiculo * loadbdveics(char *nomearq){
+veiculo* loadbdveics(char *nomearq){
 
-    veiculo *ptr_veic = malloc(sizeof(veiculo));
-    veiculo veic_vect[150];
-    ptr_veic = &veic_vect;
+    veiculo *ptr_veic = malloc(150 * sizeof(veiculo));
     
     FILE * arq = fopen(nomearq,"rt");
 
     for (int i=0;i<150;i++){
-        veiculo carro;
-        fscanf(arq,"%s",carro.placa);
-        fscanf(arq,"%s",carro.modelo);
-        fscanf(arq,"%s",carro.marca);
-        fscanf(arq,"%f",&carro.quilometragem);
+
+        fscanf(arq,"%s",ptr_veic[i].placa);
+        fscanf(arq,"%s",ptr_veic[i].modelo);
+        fscanf(arq,"%s",ptr_veic[i].marca);
+        fscanf(arq,"%d",&ptr_veic[i].quilometragem);
 
     }
 
     fclose(arq);
+
+    return ptr_veic;
 }
 
 int main(void){
-    char nomearq[32] = "./txt/bdveiculos.txt";
-    veiculo vect[] = loadbdveics(nomearq);
-
+    char nomearq[50] = "./005-malloc/exFix/txt/bdveiculos.txt";
+    veiculo *vect = loadbdveics(nomearq);
+    for (int i=0;i,150;i++){
+        printf("Placa: %s\n",vect[i].placa);
+        printf("Modelo: %s\n",vect[i].modelo);
+        printf("Marca: %s\n",vect[i].marca);
+        printf("Quilometragem: %d\n",vect[i].quilometragem);
+    }
+    free(vect);
     return 0;
 }
