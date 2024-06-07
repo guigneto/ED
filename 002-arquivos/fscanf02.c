@@ -10,7 +10,7 @@ int main(){
   char nome[30];
   char linhaA[512];
 
-  FILE * arq = fopen("./arquivos/txt/bd02.txt","rt");
+  FILE * arq = fopen("./002-arquivos/txt/bd02.txt","rt");
 
   fscanf(arq,"%s ,%d,%f",nome,&idade,&altura);
   
