@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct {
     char placa[12];
@@ -7,6 +8,17 @@ typedef struct {
     char marca[50];
     int quilometragem;
 } veiculo;
+
+void filtro(veiculo *ptr_veic,char *marca_veiculo){ 
+    for(int i=0;i<150;i++){
+        char nome[50] = ptr_veic[i].modelo;
+        strcat(nome,".txt");
+        FILE * arq = fopen("./005-malloc/exFix/txt/"nome,"wt");
+        fprintf(arq,"%s,%s,%s,%d",ptr_veic[i].placa,ptr_veic[i].modelo,ptr_veic[i].marca,ptr_veic.quilometragem);
+        fclose(arq);
+    }
+   
+}
 
 veiculo* loadbdveics(char *nomearq){
 
@@ -31,7 +43,7 @@ veiculo* loadbdveics(char *nomearq){
 int main(void){
     char nomearq[50] = "./005-malloc/exFix/txt/bdveiculos.txt";
     veiculo *vect = loadbdveics(nomearq);
-    for (int i=0;i,150;i++){
+    for (int i=0;i<150;i++){
         printf("Placa: %s\n",vect[i].placa);
         printf("Modelo: %s\n",vect[i].modelo);
         printf("Marca: %s\n",vect[i].marca);
