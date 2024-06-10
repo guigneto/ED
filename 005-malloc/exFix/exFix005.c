@@ -9,6 +9,7 @@ typedef struct {
     int quilometragem;
 } veiculo;
 
+<<<<<<< HEAD
 void filtro(veiculo *ptr_veic, char *marca_veiculo) {
     
     for (int i = 0; i < 150; i++) {
@@ -33,6 +34,17 @@ void filtro(veiculo *ptr_veic, char *marca_veiculo) {
             }
         }
     }
+=======
+void filtro(veiculo *ptr_veic,char *marca_veiculo){ 
+    for(int i=0;i<150;i++){
+        char nome[50] = ptr_veic[i].modelo;
+        strcat(nome,".txt");
+        FILE * arq = fopen("./005-malloc/exFix/txt/"nome,"wt");
+        fprintf(arq,"%s,%s,%s,%d",ptr_veic[i].placa,ptr_veic[i].modelo,ptr_veic[i].marca,ptr_veic.quilometragem);
+        fclose(arq);
+    }
+   
+>>>>>>> 7ef4224846a8e1db722fc9060bcf3dcd10e44f9b
 }
 
 veiculo* loadbdveics(char *nomearq){
@@ -58,7 +70,10 @@ veiculo* loadbdveics(char *nomearq){
 int main(void){
     char nomearq[50] = "./txt/bdveiculos.txt";
     veiculo *vect = loadbdveics(nomearq);
+<<<<<<< HEAD
     
+=======
+>>>>>>> 7ef4224846a8e1db722fc9060bcf3dcd10e44f9b
     for (int i=0;i<150;i++){
         printf("Placa: %s\n",vect[i].placa);
         printf("Modelo: %s\n",vect[i].modelo);
