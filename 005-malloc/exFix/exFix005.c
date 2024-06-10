@@ -58,10 +58,7 @@ veiculo* loadbdveics(char *nomearq){
 int main(void){
     char nomearq[50] = "./txt/bdveiculos.txt";
     veiculo *vect = loadbdveics(nomearq);
-<<<<<<< HEAD
     
-=======
->>>>>>> 7ef4224846a8e1db722fc9060bcf3dcd10e44f9b
     for (int i=0;i<150;i++){
         printf("Placa: %s\n",vect[i].placa);
         printf("Modelo: %s\n",vect[i].modelo);
