@@ -35,11 +35,32 @@ Lista newList(){
     return l;
 }
 
+void anulaNo(t_no no){
+    no->proximo = NULL;
+    no->anterior = NULL;
+    no->dado = NULL;
+    free(no);
+}
+
 int len(Lista list){
     return list->tamanho;
 }
 
-Lista append(Lista list, t_dado data){
+t_dado getElem(Lista list, int pos){
+    t_no aux;
+    if((pos>=0)&&(pos<list->tamanho)&&(list->tamanho>0)){
+        aux = list->primeiro;
+        for(int i=0;i<pos;i++){
+            aux = aux->proximo;
+        }
+        return aux->dado;
+    }
+    else{
+        return NULL;
+    }
+}
+
+Lista appendElem(Lista list, t_dado data){
     
     t_no no = newNo(data);
 
@@ -57,24 +78,11 @@ Lista append(Lista list, t_dado data){
     return list;
 }
 
-t_dado getElem(Lista list, int pos){
-    t_no aux;
-    if((pos>=0)&&(pos<list->tamanho)&&(list->tamanho>0)){
-        aux = list->primeiro;
-        for(int i=0;i<pos;i++){
-            aux = aux->proximo;
-        }
-        return aux->dado;
-    }
-    else{
-        return NULL;
-    }
-}
 
-Lista insert(Lista list, t_dado data, int pos){
+Lista insertElem(Lista list, t_dado data, int pos){
     if((pos>=0)&&(pos<=list->tamanho)){
         if((pos == list->tamanho)||(list->tamanho == 0)){
-            append(list,data);
+            appendElem(list,data);
         }
         else{  //lista nao e vazia
             t_no novo_no = newNo(data);
@@ -101,10 +109,65 @@ Lista insert(Lista list, t_dado data, int pos){
     return list;
 }
 
+t_dado removeElem(Lista list,int pos){
+    if((pos>=0)&&(list->tamanho>0)&&(pos<list->tamanho)){ //checa se pos valida
+        t_no aux = list->primeiro;
+        for(int i=0;i<pos;i++){
+            aux = aux->proximo;
+        }
+        if(pos==0){//se for a primeira
+            if(list->tamanho==1){ //lista com 1 elemento
+                list->primeiro = NULL;
+                list->ultimo = NULL;
+            }
+            else{
+                list->primeiro = aux->proximo;
+                aux->proximo->anterior = NULL;
+            }
+        }
+        else{ //pos nao e a primeira 
+            if(pos==list->tamanho-1){ //se for a ultima
+                list->ultimo = aux->anterior;
+                aux->anterior->proximo = NULL;
+            }
+            else{ //pos esta no meio
+                aux->anterior->proximo = aux->proximo;
+                aux->proximo->anterior = aux->anterior;
+            }
+        }
+        
+        list->tamanho--;
+        return aux->dado;
+    }
+    else{
+        return NULL;
+    }
+}
+
+void printListInt(Lista list){
+    printf("[ ");
+    for(int i=0;i<list->tamanho;i++){
+        printf("%d ",getElem(list,i));
+    }
+    printf("]\n");
+}
 
 int main(void){
 
+    Lista lista = newList();
+    for(int i=0;i<5;i++){
+        lista = appendElem(lista,i*4);
+    }
+    printListInt(lista);
+    
+    lista = appendElem(lista,69);
+    printListInt(lista);
 
+    lista = insertElem(lista,85,1);
+    printListInt(lista);
 
+    removeElem(lista,3);
+    printListInt(lista);
+     
     return 0;
 }
