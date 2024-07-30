@@ -46,22 +46,8 @@ int len(Lista list){
     return list->tamanho;
 }
 
-t_dado getElem(Lista list, int pos){
-    t_no aux;
-    if((pos>=0)&&(pos<list->tamanho)&&(list->tamanho>0)){
-        aux = list->primeiro;
-        for(int i=0;i<pos;i++){
-            aux = aux->proximo;
-        }
-        return aux->dado;
-    }
-    else{
-        return NULL;
-    }
-}
-
 Lista appendElem(Lista list, t_dado data){
-    
+
     t_no no = newNo(data);
 
     if(list->tamanho > 0){
@@ -78,6 +64,19 @@ Lista appendElem(Lista list, t_dado data){
     return list;
 }
 
+t_dado getElem(Lista list, int pos){
+    t_no aux;
+    if((pos>=0)&&(pos<list->tamanho)&&(list->tamanho>0)){
+        aux = list->primeiro;
+        for(int i=0;i<pos;i++){
+            aux = aux->proximo;
+        }
+        return aux->dado;
+    }
+    else{
+        return NULL;
+    }
+}
 
 Lista insertElem(Lista list, t_dado data, int pos){
     if((pos>=0)&&(pos<=list->tamanho)){
@@ -115,6 +114,7 @@ t_dado removeElem(Lista list,int pos){
         for(int i=0;i<pos;i++){
             aux = aux->proximo;
         }
+        t_dado auxDado = aux->dado;
         if(pos==0){//se for a primeira
             if(list->tamanho==1){ //lista com 1 elemento
                 list->primeiro = NULL;
@@ -135,9 +135,10 @@ t_dado removeElem(Lista list,int pos){
                 aux->proximo->anterior = aux->anterior;
             }
         }
-        
+
         list->tamanho--;
-        return aux->dado;
+        anulaNo(aux);
+        return auxDado;
     }
     else{
         return NULL;
@@ -159,7 +160,7 @@ int main(void){
         lista = appendElem(lista,i*4);
     }
     printListInt(lista);
-    
+
     lista = appendElem(lista,69);
     printListInt(lista);
 
@@ -168,6 +169,6 @@ int main(void){
 
     removeElem(lista,3);
     printListInt(lista);
-     
+
     return 0;
 }
